@@ -12,7 +12,7 @@ module.exports = ({ strapi }) => {
         const skipLocalizationsFields = strapi.plugin('strapi-plugin-populate-deep')?.config('skipLocalizationsFields');
 
         const depth = populate[1] ?? defaultDepth;
-        const ignore = skipLocalizationsFields ? ['localizations'] : [];
+        const ignore = (populate[2] ?? skipLocalizationsFields) ? ['localizations'] : [];
         const modelObject = getFullPopulateObject(event.model.uid, depth, ignore);
         event.params.populate = modelObject.populate;
       }
